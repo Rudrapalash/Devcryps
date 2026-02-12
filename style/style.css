@@ -763,7 +763,7 @@ body {
     justify-content: flex-start;
     /* 1. Enable Snap on the container */
     scroll-snap-type: x mandatory; 
-    
+   
     /* Optional: Improves the feel of the scroll */
     scroll-behavior: smooth;
     -webkit-overflow-scrolling: touch; 
@@ -779,9 +779,13 @@ body {
     
     /* 3. Ensure cards don't shrink */
     flex: 0 0 85%; 
-    width: 300px;
+    width: 250px;
 
     
+}
+
+.card-wrapper .displayCarda{
+    width: 250px;
 }
     
    
