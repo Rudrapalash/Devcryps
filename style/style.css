@@ -13,6 +13,8 @@
     font-family: "Segoe UI", system-ui, sans-serif;
     /* Prevent text flickering during animations */
     -webkit-font-smoothing: antialiased;
+    margin: 0;
+    padding: 0;
     
     
     
@@ -35,6 +37,28 @@ body {
     background-attachment: fixed;
     color: white;
 }
+
+
+/* Ensuring the workflow wrapper can contain the absolute SVG */
+        .workflow-wrapper {
+            position: relative;
+            padding: 40px 0;
+        }
+
+        /* Flowing line animation */
+        #flow-path {
+            stroke-dasharray: 10, 5; /* Creates the dashed effect */
+            animation: flow 2s linear infinite;
+        }
+
+        @keyframes flow {
+            from {
+                stroke-dashoffset: 30;
+            }
+            to {
+                stroke-dashoffset: 0;
+            }
+        }
 
 /* =============================================================
    2. NAVIGATION (NAVGLASS)
@@ -154,6 +178,7 @@ body {
     justify-content: center;
     font-size: 30px;
     text-align: center;
+    padding: 20px;
 }
 
 .desc {
@@ -161,7 +186,15 @@ body {
     justify-content: center;
     text-align: center;
     font-size: large;
+    padding: 10px;
     
+}
+
+
+.scroll-vertical-container {
+    height: 350px;
+    overflow: hidden;
+    position: relative;
 }
 
 
@@ -187,7 +220,7 @@ body {
 .animated-text {
     color: #3BD0FF;
     padding-left: 5px;
-    padding-right: 5px;
+    
 }
 
 .animated-text::before {
@@ -373,11 +406,7 @@ body {
     100% { transform: translate3d(0, -50%, 0); }
 }
 
-.scroll-vertical-container {
-    height: 350px;
-    overflow: hidden;
-    position: relative;
-}
+
 
 .scroll-content {
     display: flex;
@@ -386,6 +415,7 @@ body {
     transform: translate3d(0, 0, 0);
     animation: verticalLoop 20s linear infinite;
     will-change: transform;
+    
 }
 
  .animated-text::before {
@@ -736,7 +766,7 @@ body {
     border-radius: 2px;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 1024px) {
 
     .glassframe{
         width: 90%;
@@ -761,15 +791,12 @@ body {
     display: flex;
     overflow-x: auto;
     justify-content: flex-start;
-    /* 1. Enable Snap on the container */
     scroll-snap-type: x mandatory; 
-   
-    /* Optional: Improves the feel of the scroll */
     scroll-behavior: smooth;
     -webkit-overflow-scrolling: touch; 
-    
     gap: 24px;
     padding: 20px;
+    
 }
 
 .card-wrapper {
@@ -778,18 +805,29 @@ body {
     height: auto;
     
     /* 3. Ensure cards don't shrink */
-    flex: 0 0 85%; 
-    width: 250px;
+    flex: 0 0 100%; 
+    ;
 
     
 }
 
 .card-wrapper .displayCarda{
-    width: 250px;
-}
+    width: 100%;
     
-   
 }
+
+.desc{
+    text-align: center;
+
+     .title { font-size: 1.8rem; }
+    .desc { font-size: 14px; }
+    
+}
+
+    
+}
+
+
 
 
 

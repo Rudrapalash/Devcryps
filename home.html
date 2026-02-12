@@ -8,8 +8,14 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@300..900&family=Ubuntu:wght@300;400;500;700&display=swap" rel="stylesheet">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./style/style.css">
+    <style>
+        /* Ensuring the workflow wrapper can contain the absolute SVG */
+        .workflow-wrapper {
+            position: relative;
+            padding: 40px 0;
+        }
+    </style>
 </head>
 
 <body>
@@ -24,13 +30,11 @@
                 <li><a href="./portfolio.html" class="ubuntu-medium">Portfolio</a></li>
                 <li><a href="home.html#contact" class="ubuntu-medium">Contact</a></li>
             </ul>
-                                <div class="menu-icon">
-                                <div class="line"></div>
-                                <div class="line"></div>
-                                <div class="line"></div>
-                                </div>
-
-                
+            <div class="menu-icon">
+                <div class="line"></div>
+                <div class="line"></div>
+                <div class="line"></div>
+            </div>
         </nav>
     </header>
 
@@ -38,7 +42,8 @@
         <header class="hero-content">
             <h1 class="ubuntu-medium title flow-text">Engineering the Future of Your Digital Vision</h1>
             <h2 class="ubuntu-medium desc">Custom App Development | Scalable Web Systems | Enterprise IT Solutions</h2>
-            <h3 class="ubuntu-medium desc">Consult now for your custom <span class="animated-text ubuntu-medium"></span> </h3>
+            <p class="ubuntu-medium desc">Consult now for your custom</p>
+            <span class="animated-text ubuntu-medium desc" style="font-size: x-large; padding-top: 2px; text-align: center;"></span>
         </header>
 
         <section class="cards" aria-label="Our Core Specializations">
@@ -65,7 +70,7 @@
 
             <article class="card-wrapper">
                 <div class="displayCarda scroll-vertical-container">
-                    <img src="./Assets/ai_img.png" alt="AI Smart Engine Visualization">
+                    <img src="./Assets/ai_img.png" class="cardimg" alt="AI Smart Engine Visualization">
                 </div>
                 <button type="button">Smart Engines</button>
             </article>
@@ -93,8 +98,8 @@
         </div>
 
         <div class="workflow-wrapper" aria-hidden="true">
-            <svg class="flow-line" viewBox="0 0 1000 100" preserveAspectRatio="none">
-                <path d="M0,50 Q250,0 500,50 T1000,50" fill="none" stroke="#00d4ff" stroke-width="3" />
+            <svg id="flow-svg" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; overflow: visible;">
+                <path id="flow-path" d="" fill="none" stroke="#00d4ff" stroke-width="3" />
             </svg>
 
             <div class="process-container">
@@ -182,6 +187,54 @@
             </div>
         </div>
     </footer>
+
+    <script>
+        function drawFlowLine() {
+            const path = document.getElementById('flow-path');
+            const svg = document.getElementById('flow-svg');
+            const nodes = document.querySelectorAll('.node');
+            const svgRect = svg.getBoundingClientRect();
+
+            if (nodes.length < 2) return;
+
+            let d = "";
+
+            nodes.forEach((node, index) => {
+                const rect = node.getBoundingClientRect();
+                // Center point of the node relative to the SVG container
+                const x = rect.left - svgRect.left + rect.width / 2;
+                const y = rect.top - svgRect.top + rect.height / 2;
+
+                if (index === 0) {
+                    d += `M ${x} ${y}`;
+                } else {
+                    const prevRect = nodes[index - 1].getBoundingClientRect();
+                    const prevX = prevRect.left - svgRect.left + prevRect.width / 2;
+                    const prevY = prevRect.top - svgRect.top + prevRect.height / 2;
+                    
+                    // Bezier curve points
+                    // We adjust control points based on whether layout is vertical or horizontal
+                    const isVertical = Math.abs(x - prevX) < 50; 
+                    
+                    if (isVertical) {
+                        const cpY = prevY + (y - prevY) / 2;
+                        d += ` C ${prevX} ${cpY}, ${x} ${cpY}, ${x} ${y}`;
+                    } else {
+                        const cpX = prevX + (x - prevX) / 2;
+                        d += ` C ${cpX} ${prevY}, ${cpX} ${y}, ${x} ${y}`;
+                    }
+                }
+            });
+
+            path.setAttribute('d', d);
+        }
+
+        // Initialize and listen for changes
+        window.addEventListener('resize', drawFlowLine);
+        window.addEventListener('load', drawFlowLine);
+        // Initial execution
+        drawFlowLine();
+    </script>
 
 </body>
 </html>
