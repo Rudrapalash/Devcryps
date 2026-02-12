@@ -1,0 +1,605 @@
+:root {
+    --theme-glow: #00d2ff;
+    --theme-glow-secondary: #3a7bd5;
+    /* Smooth Timing Constant */
+    --ease-smooth: cubic-bezier(0.25, 1, 0.5, 1);
+    --glass-border: rgba(255, 255, 255, 0.1);
+}
+
+* {
+    box-sizing: border-box;
+    font-family: "Segoe UI", system-ui, sans-serif;
+    /* Prevent text flickering during animations */
+    -webkit-font-smoothing: antialiased;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+    background-color: #161C28;
+    background-image: url(../Assets/background.png);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+    background-attachment: fixed;
+    color: white;
+    padding: 100px;
+    overflow-x: hidden;
+}
+
+/* --- NAVIGATION --- */
+
+.navglass {
+    position: fixed;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    height: 50px;
+    width: 85%;
+    max-width: 1100px;
+    padding: 15px 30px;
+    z-index: 1000;
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    border-radius: 50px;
+    border: 1px solid var(--glass-border);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: 0.4s ease;
+}
+
+.navglass:hover {
+    border-color: var(--theme-glow);
+    box-shadow: 0 0 30px rgba(59, 208, 255, 0.2);
+}
+
+.logo {
+    font-size: 24px;
+    font-weight: 700;
+    color: var(--theme-glow);
+    text-decoration: none;
+}
+
+nav ul {
+    list-style: none;
+    display: flex;
+    gap: 25px;
+}
+
+nav a {
+    text-decoration: none;
+    color: #00d2ff;
+    font-size: 15px;
+    transition: 0.3s;
+    position: relative;
+}
+
+nav a:hover {
+    color: white;
+}
+
+nav a::after {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: var(--theme-glow);
+    transition: 0.3s;
+}
+
+nav a:hover::after {
+    width: 100%;
+}
+
+/* --- FOLDER LIBRARY SECTION --- */
+
+.folders {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    height: 500px;
+}
+
+.folders h1 {
+    text-align: center;
+}
+
+.folder-wrapper {
+    display: flex;
+    justify-content: center;
+}
+
+.folder {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 200px;
+    width: 200px;
+}
+
+.i-wrapper {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    text-align: center;
+}
+
+.i-wrapper a img,
+.i-wrapper h2 {
+    transition: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+    cursor: pointer;
+}
+
+.i-wrapper:hover img {
+    transform: scale(1.3);
+    filter: drop-shadow(1px 1px 15px #3a7bd5);
+}
+
+.i-wrapper:hover h2 {
+    transform: scale(1.3);
+    color: #00d2ff;
+}
+
+/* --- PROJECT POPUP SECTIONS (Active States) --- */
+/* 1. Base state for all project sections (Hidden) */
+.webprjs, 
+.mobilprjs, 
+.aimlprjs, 
+.uiuxprjs, 
+.analyticsprjs {
+    /* Layout properties */
+    display: flex; 
+    justify-content: center;
+    flex-direction: row;
+    padding: 50px;
+    gap: 30px;
+    height: 450px;
+    align-items: center;
+    
+    /* Centering logic */
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    z-index: 2000;
+
+    /* Hidden State & Fade-Up Prep */
+    opacity: 0;
+    visibility: hidden;
+    transform: translate(-50%, -45%); /* Start slightly lower (45% instead of 50%) */
+    transition: opacity 0.5s ease, transform 0.5s ease, visibility 0.5s;
+    pointer-events: none; /* Prevents clicking hidden elements */
+}
+
+/* 2. Active state (Visible & Faded Up) */
+.webprjs.active, 
+.mobilprjs.active, 
+.aimlprjs.active, 
+.uiuxprjs.active, 
+.analyticsprjs.active {
+    opacity: 1;
+    visibility: visible;
+    transform: translate(-50%, -50%); /* Moves up to perfect center */
+    pointer-events: all;
+}
+
+/* Scrollbar styling for Chrome/Edge/Safari */
+.webprjs.active::-webkit-scrollbar, .mobilprjs.active::-webkit-scrollbar, 
+.aimlprjs.active::-webkit-scrollbar, .uiuxprjs.active::-webkit-scrollbar, 
+.analyticsprjs.active::-webkit-scrollbar {
+    height: 6px;
+}
+
+.webprjs.active::-webkit-scrollbar-track, .mobilprjs.active::-webkit-scrollbar-track,
+.aimlprjs.active::-webkit-scrollbar-track, .uiuxprjs.active::-webkit-scrollbar-track,
+.analyticsprjs.active::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 10px;
+}
+
+.webprjs.active::-webkit-scrollbar-thumb, .mobilprjs.active::-webkit-scrollbar-thumb,
+.aimlprjs.active::-webkit-scrollbar-thumb, .uiuxprjs.active::-webkit-scrollbar-thumb,
+.analyticsprjs.active::-webkit-scrollbar-thumb {
+    background: var(--theme-glow);
+    border-radius: 10px;
+}
+
+/* --- PROJECT CARDS --- */
+
+.prj-cards {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    flex: 0 0 auto; /* Prevents cards from squishing */
+    height: 250px;
+    width: 250px;
+    position: relative;
+    overflow: hidden;
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 15px;
+    transition: transform 0.3s var(--ease-smooth), border-color 0.3s ease;
+}
+
+/* Glass Reflection Effect */
+.prj-cards::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 50%;
+    height: 100%;
+    background: linear-gradient(
+        to right, 
+        transparent, 
+        rgba(255, 255, 255, 0.1), 
+        transparent
+    );
+    transform: skewX(-25deg);
+    transition: 0.5s;
+}
+
+.prj-cards:hover {
+    transform: translateY(-10px);
+    border-color: var(--theme-glow);
+    box-shadow: 0 10px 30px rgba(0, 210, 255, 0.15);
+}
+
+.prj-cards:hover::before {
+    left: 150%;
+}
+
+/* --- BUTTONS & UTILS --- */
+.terminate-btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    background-color: var(--theme-glow-secondary);
+    color: white;
+    height: 30px; 
+    width: 30px;  
+    padding: 15px;
+    top: 15px;
+    right: 15px;
+    border-radius: 50%;
+    z-index: 10;
+    cursor: pointer;
+}
+
+.glassframe {
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 15px;
+    padding: 30px;
+}
+
+
+/* Footer */
+.main-footer {
+    margin-top: 60px;
+    border-radius: 15px 15px 0 0;
+}
+
+.footer-content {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 30px;
+}
+
+.footer-links ul { list-style: none; }
+.footer-links a { color: #ccc; text-decoration: none; font-size: 0.9rem; }
+.footer-links a:hover { color: #00d4ff; }
+
+.footer-bottom {
+    text-align: center;
+    margin-top: 30px;
+    border-top: 1px solid rgba(255,255,255,0.1);
+    padding-top: 20px;
+    font-size: 0.8rem;
+}
+
+.navglass {
+            position: fixed;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            height: 50px;
+            width: 85%;
+            max-width: 1100px;
+            padding: 15px 30px;
+            z-index: 1000;
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            border-radius: 50px;
+            border: 1px solid var(--glass-border);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: 0.4s ease;
+        }
+
+        .navglass:hover {
+            border-color: var(--theme-glow);
+            box-shadow: 0 0 30px rgba(59, 208, 255, 0.2);
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--theme-glow);
+            text-decoration: none;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 25px;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: #00d2ff;
+            font-size: 15px;
+            transition: 0.3s;
+            position: relative;
+        }
+
+        nav a:hover {
+            color: white;
+        }
+
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--theme-glow);
+            transition: 0.3s;
+        }
+
+        nav a:hover::after {
+            width: 100%;
+        }
+
+.footer-glass {
+    position: relative; /* Overriding 'fixed' from .navglass */
+    bottom: 0;
+    left: 0;
+    transform: none;
+    width: 85%;
+    max-width: 1100px;
+    height: auto;
+    margin: 80px auto 40px; /* Space above footer */
+    padding: 30px 50px;
+    border-radius: 30px; /* Slightly more square than nav */
+}
+
+.footer-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+
+.footer-left p {
+    font-size: 13px;
+    color: rgba(255, 255, 255, 0.6);
+    margin-top: 10px;
+}
+
+.social-links {
+    display: flex;
+    gap: 20px;
+    justify-content: flex-end;
+    margin-bottom: 15px;
+}
+
+.social-links a {
+    text-decoration: none;
+    color: var(--theme-glow);
+    font-weight: bold;
+    font-size: 14px;
+    width: 35px;
+    height: 35px;
+    border: 1px solid rgba(0, 210, 255, 0.3);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s var(--ease-smooth);
+}
+
+.social-links a:hover {
+    background: var(--theme-glow);
+    color: #000;
+    box-shadow: 0 0 15px var(--theme-glow);
+    transform: translateY(-3px);
+}
+
+.copyright {
+    font-size: 12px;
+    color: rgba(255, 255, 255, 0.4);
+}
+
+/* Responsive Footer */
+@media (max-width: 768px) {
+    .footer-content {
+        flex-direction: column;
+        text-align: center;
+        gap: 30px;
+    }
+    .social-links {
+        justify-content: center;
+    }
+}
+
+/* =============================================================
+   10. ENHANCED FOOTER DESIGN
+   ============================================================= */
+.footer-glass {
+    position: relative;
+    transform: none;
+    left: 0;
+    width: 90%;
+    max-width: 100%;
+    margin: 100px auto 40px;
+    height: auto;
+    padding: 60px 50px 30px; /* More top padding */
+    border-radius: 40px;
+    border-top: 2px solid var(--theme-glow); /* Neon accent top line */
+    background: rgba(255, 255, 255, 0.03);
+    display: block; /* Overwrite flex from navglass */
+}
+
+.footer-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr;
+    gap: 50px;
+    margin-bottom: 50px;
+}
+
+.footer-tagline {
+    font-size: 14px;
+    color: rgba(255, 255, 255, 0.6);
+    line-height: 1.6;
+    margin: 20px 0;
+    max-width: 350px;
+}
+
+.footer-col h4 {
+    color: white;
+    font-size: 16px;
+    margin-bottom: 20px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+
+.footer-col ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.footer-col ul li {
+    margin-bottom: 12px;
+}
+
+.footer-col ul a {
+    text-decoration: none;
+    color: rgba(255, 255, 255, 0.5);
+    font-size: 14px;
+    transition: 0.3s;
+}
+
+.footer-col ul a:hover {
+    color: var(--theme-glow);
+    padding-left: 5px;
+}
+
+/* Status & Bottom Bar */
+.footer-bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 30px;
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+
+}
+
+.footer-status {
+    font-size: 12px;
+    color: rgba(255, 255, 255, 0.5);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.status-dot {
+    width: 8px;
+    height: 8px;
+    background: #00ff88; /* Green status */
+    border-radius: 50%;
+    box-shadow: 0 0 10px #00ff88;
+    animation: pulseStatus 2s infinite;
+}
+
+@keyframes pulseStatus {
+    0% { opacity: 1; }
+    50% { opacity: 0.4; }
+    100% { opacity: 1; }
+}
+
+/* Mobile Tweak */
+@media (max-width: 768px) {
+    .footer-grid {
+        grid-template-columns: 1fr;
+        text-align: center;
+    }
+    .footer-tagline {
+        margin: 20px auto;
+    }
+    .footer-bottom {
+        flex-direction: column;
+        gap: 20px;
+    }
+}
+/* --- ANIMATIONS --- */
+
+@keyframes fadeInUp {
+    0% { transform: translateX(10%); opacity: 0; }
+    100% { transform: translateX(0%); opacity: 1; }
+}
+
+.fadeInUp-animation { animation: 1s fadeInUp both; }
+.delay-1 { animation-delay: 0.2s; }
+.delay-2 { animation-delay: 0.4s; }
+.delay-3 { animation-delay: 0.6s; }
+.delay-4 { animation-delay: 0.8s; }
+.delay-5 { animation-delay: 1.0s; }
+
+@keyframes pulseStatus {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.4; }
+}
+
+/* --- RESPONSIVE --- */
+
+@media (max-width: 768px) {
+    .footer-grid { grid-template-columns: 1fr; text-align: center; }
+    .footer-bottom { flex-direction: column; gap: 20px; }
+    .webprjs.active { width: 95%; height: 400px; padding: 20px; }
+}
+
+
+
+.scrool{
+
+    display: flex;
+    gap: 20px;
+    padding: 20px;
+
+
+     /* Horizontal Scroll Logic */
+    width: 90%;
+    max-width: 1200px;
+    overflow-x: hidden;
+    overflow-y: hidden;
+    white-space: nowrap;
+    
+   
+
+    /* Custom Scrollbar Styling */
+    scrollbar-width: thin;
+    scrollbar-color: var(--theme-glow) rgba(255, 255, 255, 0.1);
+}

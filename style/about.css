@@ -1,0 +1,492 @@
+/* Global Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+    background-color: #161C28;
+    background-image: url(../Assets/background.png);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+    background-attachment: fixed;
+    color: white;
+    font-family: 'Ubuntu', sans-serif;
+
+}
+
+/* Reusable Glass Effect */
+.glassframe {
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 15px;
+    padding: 30px;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding:  100px;
+}
+
+/* Header */
+.main-header {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    margin-bottom: 40px;
+    border-radius: 0 0 15px 15px;
+}
+
+.nav-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    font-size: 1.8rem;
+    color: #00d4ff;
+    font-weight: 700; /* Keeping logo bold for brand distinction */
+}
+
+.nav-links {
+    display: flex;
+    list-style: none;
+    gap: 25px;
+}
+
+.nav-links a {
+    text-decoration: none;
+    color: #ccc;
+    transition: 0.3s;
+}
+
+.nav-links a:hover, .nav-links a.active {
+    color: #00d4ff;
+}
+
+/* Hero Section */
+
+.about-hero{
+    padding-top: 50px;
+}
+.about-hero h1 {
+    font-size: 2.5rem;
+    margin-bottom: 15px;
+}
+
+.stats-row {
+    display: flex;
+    gap: 40px;
+    margin-top: 30px;
+}
+
+.stat-number {
+    font-size: 1.5rem;
+    color: #00d4ff;
+    display: block;
+}
+
+/* Team Grid */
+.team-section h1 {
+    margin: 40px 0 20px;
+    font-size: 2rem;
+}
+
+.services-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+}
+
+.service-card {
+    text-align: center;
+    transition: 0.3s;
+}
+
+.service-card:hover {
+    transform: translateY(-5px);
+    border-color: #00d4ff;
+}
+
+.team-img-placeholder {
+    width: 70px;
+    height: 70px;
+    background: linear-gradient(45deg, #00d4ff, #0055ff);
+    border-radius: 50%;
+    margin: 0 auto 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+}
+
+.role {
+    color: #00d4ff;
+    font-size: 0.9rem;
+    margin-bottom: 10px;
+}
+
+.team-bio {
+    font-size: 0.85rem;
+    color: #bbb;
+}
+
+/* Footer */
+.main-footer {
+    margin-top: 60px;
+    border-radius: 15px 15px 0 0;
+}
+
+.footer-content {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 30px;
+}
+
+.footer-links ul { list-style: none; }
+.footer-links a { color: #ccc; text-decoration: none; font-size: 0.9rem; }
+.footer-links a:hover { color: #00d4ff; }
+
+.footer-bottom {
+    text-align: center;
+    margin-top: 30px;
+    border-top: 1px solid rgba(255,255,255,0.1);
+    padding-top: 20px;
+    font-size: 0.8rem;
+}
+
+.navglass {
+            position: fixed;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            height: 50px;
+            width: 85%;
+            max-width: 1100px;
+            padding: 15px 30px;
+            z-index: 1000;
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            border-radius: 50px;
+            border: 1px solid var(--glass-border);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: 0.4s ease;
+        }
+
+        .navglass:hover {
+            border-color: var(--theme-glow);
+            box-shadow: 0 0 30px rgba(59, 208, 255, 0.2);
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--theme-glow);
+            text-decoration: none;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 25px;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: #00d2ff;
+            font-size: 15px;
+            transition: 0.3s;
+            position: relative;
+        }
+
+        nav a:hover {
+            color: white;
+        }
+
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--theme-glow);
+            transition: 0.3s;
+        }
+
+        nav a:hover::after {
+            width: 100%;
+        }
+.footer-glass {
+    position: relative;
+    width: 90%;
+    max-width: 1100px;
+    margin: 100px auto 40px;
+    padding: 60px 50px 30px;
+    background: rgba(255, 255, 255, 0.03);
+    backdrop-filter: blur(15px);
+    border-radius: 40px;
+    border-top: 2px solid var(--theme-glow);
+    /* Ensure it doesn't inherit flex behavior if you want a grid */
+    display: block; 
+}
+
+.footer-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+
+.footer-left p {
+    font-size: 13px;
+    color: rgba(255, 255, 255, 0.6);
+    margin-top: 10px;
+}
+
+.social-links {
+    display: flex;
+    gap: 20px;
+    justify-content: flex-end;
+    margin-bottom: 15px;
+}
+
+.social-links a {
+    text-decoration: none;
+    color: var(--theme-glow);
+    font-weight: bold;
+    font-size: 14px;
+    width: 35px;
+    height: 35px;
+    border: 1px solid rgba(0, 210, 255, 0.3);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s var(--ease-smooth);
+}
+
+.social-links a:hover {
+    background: var(--theme-glow);
+    color: #000;
+    box-shadow: 0 0 15px var(--theme-glow);
+    transform: translateY(-3px);
+}
+
+.copyright {
+    font-size: 12px;
+    color: rgba(255, 255, 255, 0.4);
+}
+
+/* Responsive Footer */
+@media (max-width: 768px) {
+    .footer-content {
+        flex-direction: column;
+        text-align: center;
+        gap: 30px;
+    }
+    .social-links {
+        justify-content: center;
+    }
+}
+
+/* =============================================================
+   10. ENHANCED FOOTER DESIGN
+   ============================================================= */
+.footer-glass {
+    position: relative;
+    transform: none;
+    left: 0;
+    width: 90%;
+    max-width: 100%;
+    margin: 100px auto 40px;
+    height: auto;
+    padding: 60px 50px 30px; /* More top padding */
+    border-radius: 40px;
+    border-top: 2px solid var(--theme-glow); /* Neon accent top line */
+    background: rgba(255, 255, 255, 0.03);
+    display: block; /* Overwrite flex from navglass */
+}
+
+.footer-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr;
+    gap: 50px;
+    margin-bottom: 50px;
+}
+
+.footer-tagline {
+    font-size: 14px;
+    color: rgba(255, 255, 255, 0.6);
+    line-height: 1.6;
+    margin: 20px 0;
+    max-width: 350px;
+}
+
+.footer-col h4 {
+    color: white;
+    font-size: 16px;
+    margin-bottom: 20px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+
+.footer-col ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.footer-col ul li {
+    margin-bottom: 12px;
+}
+
+.footer-col ul a {
+    text-decoration: none;
+    color: rgba(255, 255, 255, 0.5);
+    font-size: 14px;
+    transition: 0.3s;
+}
+
+.footer-col ul a:hover {
+    color: var(--theme-glow);
+    padding-left: 5px;
+}
+
+/* Status & Bottom Bar */
+.footer-bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 30px;
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+
+}
+
+.footer-status {
+    font-size: 12px;
+    color: rgba(255, 255, 255, 0.5);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.status-dot {
+    width: 8px;
+    height: 8px;
+    background: #00ff88; /* Green status */
+    border-radius: 50%;
+    box-shadow: 0 0 10px #00ff88;
+    animation: pulseStatus 2s infinite;
+}
+
+@keyframes pulseStatus {
+    0% { opacity: 1; }
+    50% { opacity: 0.4; }
+    100% { opacity: 1; }
+}
+
+/* Mobile Tweak */
+@media (max-width: 768px) {
+    .footer-grid {
+        grid-template-columns: 1fr;
+        text-align: center;
+    }
+    .footer-tagline {
+        margin: 20px auto;
+    }
+    .footer-bottom {
+        flex-direction: column;
+        gap: 20px;
+    }
+}
+
+
+.services-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 25px;
+    margin-top: 40px;
+}
+
+.team-card {
+    position: relative;
+    height: 400px; /* Adjust height as needed */
+    background-size: cover;
+    background-position: center;
+    border-radius: 20px;
+    overflow: hidden; /* Clips the glass overlay to the card corners */
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end; /* Pushes the text to the bottom */
+    padding: 0 !important; /* Remove padding from parent card to let glass touch edges */
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.team-card:hover {
+    transform: scale(1.03);
+    border-color: #00d4ff;
+}
+
+/* The Glass Overlay at the bottom */
+.team-info-overlay {
+    background: rgba(10, 10, 12, 0.7); /* Darker base for better text readability */
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    padding: 20px;
+    border-radius: 0; /* Keep it flat against the bottom and sides */
+    border: none;
+    border-top: 1px solid rgba(255, 255, 255, 0.2);
+    width: 100%;
+}
+
+.team-info-overlay h3 {
+    margin-bottom: 5px;
+    font-size: 1.3rem;
+    color: #fff;
+}
+
+.team-info-overlay .role {
+    color: #00d4ff;
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 8px;
+}
+
+.team-info-overlay .team-bio {
+    font-size: 0.8rem;
+    color: #ddd;
+    line-height: 1.4;
+}
+
+/* Optional: Subtle gradient over the photo so the top is clear and the bottom is dark */
+.team-card::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to bottom, transparent 50%, rgba(0,0,0,0.8) 100%);
+    z-index: 0;
+}
+
+/* Ensure text stays above the gradient */
+.team-info-overlay {
+    position: relative;
+    z-index: 1;
+}
+

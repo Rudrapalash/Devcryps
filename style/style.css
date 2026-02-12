@@ -1,0 +1,803 @@
+/* =============================================================
+   1. GLOBAL & THEME VARIABLES
+   ============================================================= */
+:root {
+    --theme-glow: #00d2ff;
+    --theme-glow-secondary: #3a7bd5;
+    /* Smooth Timing Constant */    
+    --ease-smooth: cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+* {
+    box-sizing: border-box;
+    font-family: "Segoe UI", system-ui, sans-serif;
+    /* Prevent text flickering during animations */
+    -webkit-font-smoothing: antialiased;
+    
+    
+    
+}
+html, body {
+    /* Prevent horizontal scroll */
+    overflow-x: hidden;
+
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+    background-color: #161C28;
+    background-image: url(../Assets/background.png);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+    background-attachment: fixed;
+    color: white;
+}
+
+/* =============================================================
+   2. NAVIGATION (NAVGLASS)
+   ============================================================= */
+.navglass {
+            position: fixed;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            height: 50px;
+            width: 85%;
+            max-width: 1100px;
+            padding: 15px 30px;
+            z-index: 1000;
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            border-radius: 50px;
+            border: 1px solid var(--glass-border);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: 0.4s ease;
+        }
+
+        .navglass:hover {
+            border-color: var(--theme-glow);
+            box-shadow: 0 0 30px rgba(59, 208, 255, 0.2);
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--theme-glow);
+            text-decoration: none;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 25px;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: #00d2ff;
+            font-size: 15px;
+            transition: 0.3s;
+            position: relative;
+        }
+
+        nav a:hover {
+            color: white;
+        }
+
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--theme-glow);
+            transition: 0.3s;
+        }
+
+        nav a:hover::after {
+            width: 100%;
+        }
+
+/* =============================================================
+   3. MAIN LAYOUT (GLASSFRAME) - MATCHED TO NAVGLASS
+   ============================================================= */
+.glassframe {
+    position: relative;
+    margin: 120px auto 30px;
+    width: 85%;
+     /* Matched to navglass max-width */
+    min-height: 80vh;
+    padding: 40px;
+    
+    /* Strict Matched Styles */
+    background: rgba(255, 255, 255, 0.05); /* Lowered from 0.15 to match navglass */
+    backdrop-filter: blur(15px); /* Matched to navglass 15px */
+    -webkit-backdrop-filter: blur(15px);
+    border-radius: 50px; /* Matched to navglass pill shape */
+    border: 1px solid var(--glass-border); /* Matched to navglass variable */
+    
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+    transition: 0.4s ease; /* Matched navglass transition speed */
+    
+    /* Optimized Fade InUp Entrance */
+    opacity: 0;
+    will-change: transform, opacity;
+    animation: fadeInUp 1.4s var(--ease-smooth) forwards;
+}
+
+.glassframe:hover {
+    border-color: var(--theme-glow);
+    box-shadow: 0 0 30px rgba(59, 208, 255, 0.2);
+}
+
+.glassframe:nth-of-type(2) { animation-delay: 0.2s; }
+.glassframe:nth-of-type(3) { animation-delay: 0.4s; }
+
+/* =============================================================
+   4. TYPOGRAPHY & TEXT EFFECTS
+   ============================================================= */
+.ubuntu-medium {
+    font-family: "Ubuntu", sans-serif;
+    font-weight: 500;
+    font-style: normal;
+}
+
+.title {
+    display: flex;
+    justify-content: center;
+    font-size: 30px;
+    text-align: center;
+}
+
+.desc {
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    font-size: large;
+    
+}
+
+
+
+
+.flow-text {
+    background: linear-gradient(
+        to right, 
+        #ffffff 20%, 
+        var(--theme-glow) 40%, 
+        var(--theme-glow-secondary) 60%, 
+        #ffffff 80%
+    );
+    background-size: 200% auto;
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    /* Slower animation for a more premium feel */
+    animation: colorFlow 8s linear infinite;
+    filter: drop-shadow(0 2px 4px rgba(0,0,0,0.3));
+}
+
+.animated-text {
+    color: #3BD0FF;
+    padding-left: 5px;
+    padding-right: 5px;
+}
+
+.animated-text::before {
+    content: "cool";
+    animation: changeWord 6s var(--ease-smooth) infinite;
+}
+
+/* =============================================================
+   5. CARDS & WRAPPERS
+   ============================================================= */
+.cards {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 24px;
+    padding-top: 50px;
+}
+
+.card-wrapper {
+    color: #00d2ff;
+    text-align: center;
+    font-size: small;
+      
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    padding-bottom: 40px;
+    height: 400px;
+    /* Smooth hover transition */
+    transition: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+    border-radius: 50px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    background: rgba(255, 255, 255, 0.05);
+    cursor: pointer;
+    will-change: transform;
+    backface-visibility: hidden;
+    
+}
+
+.card-wrapper:hover {
+    transform: translateY(-15px) scale(1.02);
+    background: rgba(255, 255, 255, 0.12);
+    box-shadow: 0 15px 35px rgba(0, 210, 255, 0.3), 
+                0 0 50px rgba(0, 210, 255, 0.1);
+    border: 1px solid var(--theme-glow);
+}
+
+.displayCarda, .displayCardb, .displayCardc {
+    display: block;
+    overflow: hidden;
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+    transition: all 0.5s var(--ease-smooth);
+}
+
+.displayCarda { height: 300px; width: 300px; border-radius: 50px; }
+
+
+.card-wrapper:hover .displayCarda, 
+
+/* =============================================================
+   UPDATED: CARDCH SECTION (ROW VIEW)
+   ============================================================= */
+.cardch-wrapper {
+    display: flex;
+    flex-direction: row; /* Fixed to Row */
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap; /* Ensures responsiveness */
+}
+
+.cardch {
+    flex: 1;
+    min-width: 280px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    
+    padding: 30px 15px; /* Balanced padding for row view */
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 50px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+    
+    cursor: pointer;
+    transition: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+    will-change: transform;
+    backface-visibility: hidden;
+}
+
+.cardch h1 {
+    color: #00d2ff; 
+    font-size: 22px; /* Fixed text size */
+    margin-bottom: 15px;
+}
+
+.cardch h2 {
+    font-size: 14px; /* Fixed description size */
+    line-height: 1.6;
+    padding: 0 10px;
+    text-align: center;
+    font-weight: 300;
+}
+
+.cardch:hover {
+    transform: translateY(-15px) scale(1.02);
+    background: rgba(255, 255, 255, 0.12);
+    box-shadow: 0 15px 35px rgba(0, 210, 255, 0.3), 
+                0 0 50px rgba(0, 210, 255, 0.1);
+    border: 1px solid var(--theme-glow);
+}
+
+/* =============================================================
+   6. IMAGES & BUTTONS
+   ============================================================= */
+.cardimg {
+    display: block;
+    width: 100%;
+    height: 100%;
+    border-radius: 30px;
+    transition: filter 0.5s var(--ease-smooth), transform 0.5s var(--ease-smooth);
+}
+
+.card-wrapper:hover .cardimg {
+    filter: brightness(1.1) drop-shadow(0 0 10px var(--theme-glow-secondary));
+    
+}
+
+.cards button {
+    display: flex;
+    background: rgba(255, 255, 255, 0.15);
+    color: #ffffff;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    padding: 10px 20px;
+    font-weight: bold;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: all 0.4s var(--ease-smooth);
+    border-radius: 30px;
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+}
+
+.cards button:hover {
+    box-shadow: 0 0 20px var(--theme-glow);
+    background-color: var(--theme-glow);
+    color: #000;
+    transform: translateY(-2px);
+}
+
+/* =============================================================
+   7. KEYFRAMES & ANIMATION LOGIC
+   ============================================================= */
+@keyframes fadeInUp {
+    0% {
+        opacity: 0;
+        transform: translateY(30px);
+        filter: blur(10px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+        filter: blur(0);
+    }
+}
+
+@keyframes colorFlow {
+    0% { background-position: 200% center; }
+    100% { background-position: 0% center; }
+}
+
+@keyframes verticalLoop {
+    0% { transform: translate3d(0, 0, 0); }
+    100% { transform: translate3d(0, -50%, 0); }
+}
+
+.scroll-vertical-container {
+    height: 350px;
+    overflow: hidden;
+    position: relative;
+}
+
+.scroll-content {
+    display: flex;
+    flex-direction: column;
+    /* translate3d forces GPU rendering */
+    transform: translate3d(0, 0, 0);
+    animation: verticalLoop 20s linear infinite;
+    will-change: transform;
+}
+
+ .animated-text::before {
+            content: "mobile";
+            color: var(--theme-glow);
+            animation: changeWord 6s infinite;
+        }
+
+        @keyframes changeWord {
+            0%, 33% { content: "Mobile"; }
+            34%, 66% { content: "Web"; }
+            67%, 100% { content: "AI"; }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .title { font-size: 2.2rem; }
+            .navglass { width: 95%; padding: 10px 20px; }
+            nav ul { display: none; } /* Mobile simplicity */
+            .cardch-wrapper { flex-direction: column; } /* Stacks on mobile */
+        }
+
+/* =============================================================
+   8. WORKFLOW SECTION (RESTORED)
+   ============================================================= */
+.process-container {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+    margin-top: 30px;
+    flex-wrap: wrap;
+}
+
+.process-step {
+    flex: 1;
+    min-width: 250px;
+    padding: 30px;
+    background: transparent;
+    position: relative;
+    text-align: center;
+}
+
+.node {
+    width: 15px;
+    height: 15px;
+    background: #00d4ff;
+    border-radius: 50%;
+    margin: 0 auto 20px;
+    box-shadow: 0 0 15px #00d4ff;
+}
+
+.workflow-wrapper {
+    position: relative;
+    padding: 60px 0;
+}
+
+.flow-line {
+    position: absolute;
+    top: 50px;
+    left: 0;
+    width: 100%;
+    height: 100px;
+    z-index: 0;
+    pointer-events: none;
+}
+
+.flow-line path {
+    stroke-dasharray: 1000;
+    stroke-dashoffset: 1000;
+    animation: drawLine 4s linear infinite;
+    filter: drop-shadow(0 0 8px #00d4ff);
+}
+
+@keyframes drawLine {
+    0% { stroke-dashoffset: 1000; opacity: 0; }
+    20% { opacity: 1; }
+    80% { opacity: 1; }
+    100% { stroke-dashoffset: 0; opacity: 0; }
+}
+
+
+/* =============================================================
+   9. JOIN US SECTION STYLING
+   ============================================================= */
+.join-container {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.join-form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.input-group {
+    display: flex;
+    gap: 20px;
+}
+
+.join-form input, 
+.join-form select, 
+.join-form textarea {
+    width: 100%;
+    padding: 15px 20px;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 15px;
+    color: white;
+    font-size: 15px;
+    outline: none;
+    transition: all 0.3s var(--ease-smooth);
+}
+
+.join-form input::placeholder, 
+.join-form textarea::placeholder {
+    color: rgba(255, 255, 255, 0.4);
+}
+
+/* Interactive Glow on Focus */
+.join-form input:focus, 
+.join-form select:focus, 
+.join-form textarea:focus {
+    background: rgba(255, 255, 255, 0.1);
+    border-color: var(--theme-glow);
+    box-shadow: 0 0 15px rgba(0, 210, 255, 0.2);
+}
+
+.join-form select option {
+    background: #161C28; /* Matches your body background */
+    color: white;
+}
+
+/* The Submit Button */
+.join-btn {
+    align-self: center;
+    padding: 15px 50px;
+    background: transparent;
+    border: 1px solid var(--theme-glow);
+    color: var(--theme-glow);
+    border-radius: 50px;
+    cursor: pointer;
+    font-size: 16px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    transition: all 0.4s var(--ease-smooth);
+    margin-top: 20px;
+    color: #ffffff;
+    background-color: #00d2ff;
+}
+
+.join-btn:hover {
+    background: var(--theme-glow);
+    color: #000;
+    box-shadow: 0 0 30px rgba(0, 210, 255, 0.4);
+    transform: translateY(-3px);
+}
+
+/* Mobile Responsiveness for Form */
+@media (max-width: 600px) {
+    .input-group {
+        flex-direction: column;
+    }
+}
+
+
+
+/* =============================================================
+   10. FOOTER STYLING (FOOTER-GLASS)
+   ============================================================= */
+.footer-glass {
+    position: relative; /* Overriding 'fixed' from .navglass */
+    bottom: 0;
+    left: 0;
+    transform: none;
+    width: 85%;
+    max-width: 1100px;
+    height: auto;
+    margin: 80px auto 40px; /* Space above footer */
+    padding: 30px 50px;
+    border-radius: 30px; /* Slightly more square than nav */
+}
+
+.footer-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+
+.footer-left p {
+    font-size: 13px;
+    color: rgba(255, 255, 255, 0.6);
+    margin-top: 10px;
+}
+
+.social-links {
+    display: flex;
+    gap: 20px;
+    justify-content: flex-end;
+    margin-bottom: 15px;
+}
+
+.social-links a {
+    text-decoration: none;
+    color: var(--theme-glow);
+    font-weight: bold;
+    font-size: 14px;
+    width: 35px;
+    height: 35px;
+    border: 1px solid rgba(0, 210, 255, 0.3);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s var(--ease-smooth);
+}
+
+.social-links a:hover {
+    background: var(--theme-glow);
+    color: #000;
+    box-shadow: 0 0 15px var(--theme-glow);
+    transform: translateY(-3px);
+}
+
+.copyright {
+    font-size: 12px;
+    color: rgba(255, 255, 255, 0.4);
+}
+
+/* Responsive Footer */
+@media (max-width: 768px) {
+    .footer-content {
+        flex-direction: column;
+        text-align: center;
+        gap: 30px;
+    }
+    .social-links {
+        justify-content: center;
+    }
+}
+
+/* =============================================================
+   10. ENHANCED FOOTER DESIGN
+   ============================================================= */
+.footer-glass {
+    position: relative;
+    transform: none;
+    left: 0;
+    width: 90%;
+    max-width: 100%;
+    margin: 100px auto 40px;
+    height: auto;
+    padding: 60px 50px 30px; /* More top padding */
+    border-radius: 40px;
+    border-top: 2px solid var(--theme-glow); /* Neon accent top line */
+    background: rgba(255, 255, 255, 0.03);
+    display: block; /* Overwrite flex from navglass */
+}
+
+.footer-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr;
+    gap: 50px;
+    margin-bottom: 50px;
+}
+
+.footer-tagline {
+    font-size: 14px;
+    color: rgba(255, 255, 255, 0.6);
+    line-height: 1.6;
+    margin: 20px 0;
+    max-width: 350px;
+}
+
+.footer-col h4 {
+    color: white;
+    font-size: 16px;
+    margin-bottom: 20px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+
+.footer-col ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.footer-col ul li {
+    margin-bottom: 12px;
+}
+
+.footer-col ul a {
+    text-decoration: none;
+    color: rgba(255, 255, 255, 0.5);
+    font-size: 14px;
+    transition: 0.3s;
+}
+
+.footer-col ul a:hover {
+    color: var(--theme-glow);
+    padding-left: 5px;
+}
+
+/* Status & Bottom Bar */
+.footer-bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 30px;
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+
+}
+
+.footer-status {
+    font-size: 12px;
+    color: rgba(255, 255, 255, 0.5);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.status-dot {
+    width: 8px;
+    height: 8px;
+    background: #00ff88; /* Green status */
+    border-radius: 50%;
+    box-shadow: 0 0 10px #00ff88;
+    animation: pulseStatus 2s infinite;
+}
+
+@keyframes pulseStatus {
+    0% { opacity: 1; }
+    50% { opacity: 0.4; }
+    100% { opacity: 1; }
+}
+.menu-icon {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.menu-icon .line {
+    width: 100%;
+    height: 3px;
+    background-color: var(--theme-glow);
+    border-radius: 2px;
+}
+
+@media (max-width: 425px) {
+
+    .glassframe{
+        width: 95%;
+    }
+
+    nav ul {
+        display: none;
+    }
+
+    .menu-icon {
+        display: flex;
+        width: 30px;
+        cursor: pointer;
+    }
+
+    .main h3{
+        min-width: max-content;
+        justify-content: center;
+    }
+
+    .cards {
+    display: flex;
+    overflow-x: auto;
+    justify-content: flex-start;
+    /* 1. Enable Snap on the container */
+    scroll-snap-type: x mandatory; 
+    
+    /* Optional: Improves the feel of the scroll */
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch; 
+    
+    gap: 24px;
+    padding: 20px;
+}
+
+.card-wrapper {
+    /* 2. Define where the card should "lock" */
+    scroll-snap-align: center; 
+    height: auto;
+    
+    /* 3. Ensure cards don't shrink */
+    flex: 0 0 85%; 
+    width: 300px;
+
+    
+}
+    
+   
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
