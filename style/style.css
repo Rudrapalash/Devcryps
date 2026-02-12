@@ -736,7 +736,7 @@ body {
     border-radius: 2px;
 }
 
-@media (max-width: 425px) {
+@media (max-width: 768px) {
 
     .glassframe{
         width: 95%;
