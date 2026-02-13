@@ -15,14 +15,11 @@
     -webkit-font-smoothing: antialiased;
     margin: 0;
     padding: 0;
-    
-    
-    
 }
+
 html, body {
     /* Prevent horizontal scroll */
     overflow-x: hidden;
-
 }
 
 body {
@@ -35,123 +32,107 @@ body {
     background-position: center;
     background-size: contain;
     background-attachment: fixed;
-    
     color: white;
 }
-
-
-/* Ensuring the workflow wrapper can contain the absolute SVG */
-        .workflow-wrapper {
-            position: relative;
-            padding: 40px 0;
-        }
-
-        /* Flowing line animation */
-        #flow-path {
-            stroke-dasharray: 10, 5; /* Creates the dashed effect */
-            animation: flow 2s linear infinite;
-        }
-
-        @keyframes flow {
-            from {
-                stroke-dashoffset: 30;
-            }
-            to {
-                stroke-dashoffset: 0;
-            }
-        }
 
 /* =============================================================
    2. NAVIGATION (NAVGLASS)
    ============================================================= */
 .navglass {
-            position: fixed;
-            top: 20px;
-            left: 50%;
-            transform: translateX(-50%);
-            height: 50px;
-            width: 85%;
-            max-width: 1100px;
-            padding: 15px 30px;
-            z-index: 1000;
-            background: rgba(255, 255, 255, 0.05);
-            backdrop-filter: blur(15px);
-            -webkit-backdrop-filter: blur(15px);
-            border-radius: 50px;
-            border: 1px solid var(--glass-border);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            transition: 0.4s ease;
-        }
+    position: fixed;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    height: 50px;
+    width: 85%;
+    max-width: 1100px;
+    padding: 15px 30px;
+    z-index: 1000;
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    border-radius: 50px;
+    border: 1px solid var(--glass-border);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: 0.4s ease;
+}
 
-        .navglass:hover {
-            border-color: var(--theme-glow);
-            box-shadow: 0 0 30px rgba(59, 208, 255, 0.2);
-        }
+.navglass:hover {
+    border-color: var(--theme-glow);
+    box-shadow: 0 0 30px rgba(59, 208, 255, 0.2);
+}
 
-        .logo {
-            font-size: 24px;
-            font-weight: 700;
-            color: var(--theme-glow);
-            text-decoration: none;
-        }
+.logo {
+    font-size: 24px;
+    font-weight: 700;
+    color: var(--theme-glow);
+    text-decoration: none;
+}
 
-        nav ul {
-            list-style: none;
-            display: flex;
-            gap: 25px;
-        }
+nav ul {
+    list-style: none;
+    display: flex;
+    gap: 25px;
+}
 
-        nav a {
-            text-decoration: none;
-            color: #00d2ff;
-            font-size: 15px;
-            transition: 0.3s;
-            position: relative;
-        }
+nav a {
+    text-decoration: none;
+    color: #00d2ff;
+    font-size: 15px;
+    transition: 0.3s;
+    position: relative;
+}
 
-        nav a:hover {
-            color: white;
-        }
+nav a:hover {
+    color: white;
+}
 
-        nav a::after {
-            content: '';
-            position: absolute;
-            bottom: -5px;
-            left: 0;
-            width: 0;
-            height: 2px;
-            background: var(--theme-glow);
-            transition: 0.3s;
-        }
+nav a::after {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: var(--theme-glow);
+    transition: 0.3s;
+}
 
-        nav a:hover::after {
-            width: 100%;
-        }
+nav a:hover::after {
+    width: 100%;
+}
+
+.menu-icon {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.menu-icon .line {
+    width: 100%;
+    height: 3px;
+    background-color: var(--theme-glow);
+    border-radius: 2px;
+}
 
 /* =============================================================
-   3. MAIN LAYOUT (GLASSFRAME) - MATCHED TO NAVGLASS
+   3. MAIN LAYOUT (GLASSFRAME)
    ============================================================= */
 .glassframe {
     position: relative;
     margin: 120px auto 30px;
     width: 85%;
-     /* Matched to navglass max-width */
     min-height: 80vh;
     padding: 40px;
-    
-    /* Strict Matched Styles */
-    background: rgba(255, 255, 255, 0.05); /* Lowered from 0.15 to match navglass */
-    backdrop-filter: blur(15px); /* Matched to navglass 15px */
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(15px);
     -webkit-backdrop-filter: blur(15px);
-    border-radius: 50px; /* Matched to navglass pill shape */
-    border: 1px solid var(--glass-border); /* Matched to navglass variable */
-    
+    border-radius: 50px;
+    border: 1px solid var(--glass-border);
     box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
-    transition: 0.4s ease; /* Matched navglass transition speed */
-    
-    /* Optimized Fade InUp Entrance */
+    transition: 0.4s ease;
     opacity: 0;
     will-change: transform, opacity;
     animation: fadeInUp 1.4s var(--ease-smooth) forwards;
@@ -188,18 +169,7 @@ body {
     text-align: center;
     font-size: large;
     padding: 10px;
-    
 }
-
-
-.scroll-vertical-container {
-    height: 350px;
-    overflow: hidden;
-    position: relative;
-}
-
-
-
 
 .flow-text {
     background: linear-gradient(
@@ -213,7 +183,6 @@ body {
     -webkit-background-clip: text;
     background-clip: text;
     color: transparent;
-    /* Slower animation for a more premium feel */
     animation: colorFlow 8s linear infinite;
     filter: drop-shadow(0 2px 4px rgba(0,0,0,0.3));
 }
@@ -221,12 +190,12 @@ body {
 .animated-text {
     color: #3BD0FF;
     padding-left: 5px;
-    
 }
 
 .animated-text::before {
-    content: "cool";
-    animation: changeWord 6s var(--ease-smooth) infinite;
+    content: "mobile";
+    color: var(--theme-glow);
+    animation: changeWord 6s infinite;
 }
 
 /* =============================================================
@@ -244,14 +213,12 @@ body {
     color: #00d2ff;
     text-align: center;
     font-size: small;
-      
     display: flex;
     flex-direction: column;
     align-items: center;
     gap: 20px;
     padding-bottom: 40px;
     height: 400px;
-    /* Smooth hover transition */
     transition: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
     border-radius: 50px;
     border: 1px solid rgba(255, 255, 255, 0.1);
@@ -259,7 +226,6 @@ body {
     cursor: pointer;
     will-change: transform;
     backface-visibility: hidden;
-    
 }
 
 .card-wrapper:hover {
@@ -283,68 +249,6 @@ body {
 
 .displayCarda { height: 300px; width: 300px; border-radius: 50px; }
 
-
-.card-wrapper:hover .displayCarda, 
-
-/* =============================================================
-   UPDATED: CARDCH SECTION (ROW VIEW)
-   ============================================================= */
-.cardch-wrapper {
-    display: flex;
-    flex-direction: row; /* Fixed to Row */
-    justify-content: center;
-    gap: 20px;
-    flex-wrap: wrap; /* Ensures responsiveness */
-}
-
-.cardch {
-    flex: 1;
-    min-width: 280px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    
-    padding: 30px 15px; /* Balanced padding for row view */
-    background: rgba(255, 255, 255, 0.05);
-    backdrop-filter: blur(18px);
-    -webkit-backdrop-filter: blur(18px);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    border-radius: 50px;
-    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
-    
-    cursor: pointer;
-    transition: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
-    will-change: transform;
-    backface-visibility: hidden;
-}
-
-.cardch h1 {
-    color: #00d2ff; 
-    font-size: 22px; /* Fixed text size */
-    margin-bottom: 15px;
-}
-
-.cardch h2 {
-    font-size: 14px; /* Fixed description size */
-    line-height: 1.6;
-    padding: 0 10px;
-    text-align: center;
-    font-weight: 300;
-}
-
-.cardch:hover {
-    transform: translateY(-15px) scale(1.02);
-    background: rgba(255, 255, 255, 0.12);
-    box-shadow: 0 15px 35px rgba(0, 210, 255, 0.3), 
-                0 0 50px rgba(0, 210, 255, 0.1);
-    border: 1px solid var(--theme-glow);
-}
-
-/* =============================================================
-   6. IMAGES & BUTTONS
-   ============================================================= */
 .cardimg {
     display: block;
     width: 100%;
@@ -355,7 +259,6 @@ body {
 
 .card-wrapper:hover .cardimg {
     filter: brightness(1.1) drop-shadow(0 0 10px var(--theme-glow-secondary));
-    
 }
 
 .cards button {
@@ -381,67 +284,59 @@ body {
     transform: translateY(-2px);
 }
 
-/* =============================================================
-   7. KEYFRAMES & ANIMATION LOGIC
-   ============================================================= */
-@keyframes fadeInUp {
-    0% {
-        opacity: 0;
-        transform: translateY(30px);
-        filter: blur(10px);
-    }
-    100% {
-        opacity: 1;
-        transform: translateY(0);
-        filter: blur(0);
-    }
+/* CARDCH SECTION (ROW VIEW) */
+.cardch-wrapper {
+    display: flex;
+    flex-direction: row; 
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap; 
 }
 
-@keyframes colorFlow {
-    0% { background-position: 200% center; }
-    100% { background-position: 0% center; }
-}
-
-@keyframes verticalLoop {
-    0% { transform: translate3d(0, 0, 0); }
-    100% { transform: translate3d(0, -50%, 0); }
-}
-
-
-
-.scroll-content {
+.cardch {
+    flex: 1;
     display: flex;
     flex-direction: column;
-    /* translate3d forces GPU rendering */
-    transform: translate3d(0, 0, 0);
-    animation: verticalLoop 20s linear infinite;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 30px 15px; 
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 50px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+    cursor: pointer;
+    transition: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
     will-change: transform;
-    
+    backface-visibility: hidden;
 }
 
- .animated-text::before {
-            content: "mobile";
-            color: var(--theme-glow);
-            animation: changeWord 6s infinite;
-        }
+.cardch h1 { color: #00d2ff; font-size: 22px; margin-bottom: 15px; }
+.cardch h2 { font-size: 14px; line-height: 1.6; padding: 0 10px; text-align: center; font-weight: 300; }
 
-        @keyframes changeWord {
-            0%, 33% { content: "Mobile"; }
-            34%, 66% { content: "Web"; }
-            67%, 100% { content: "AI"; }
-        }
-
-        /* Responsive */
-        @media (max-width: 768px) {
-            .title { font-size: 2.2rem; }
-            .navglass { width: 95%; padding: 10px 20px; }
-            nav ul { display: none; } /* Mobile simplicity */
-            .cardch-wrapper { flex-direction: column; } /* Stacks on mobile */
-        }
+.cardch:hover {
+    transform: translateY(-15px) scale(1.02);
+    background: rgba(255, 255, 255, 0.12);
+    box-shadow: 0 15px 35px rgba(0, 210, 255, 0.3), 
+                0 0 50px rgba(0, 210, 255, 0.1);
+    border: 1px solid var(--theme-glow);
+}
 
 /* =============================================================
-   8. WORKFLOW SECTION (RESTORED)
+   6. WORKFLOW & SCROLLING
    ============================================================= */
+.workflow-wrapper {
+    position: relative;
+    padding: 40px 0;
+}
+
+#flow-path {
+    stroke-dasharray: 10, 5;
+    animation: flow 2s linear infinite;
+}
+
 .process-container {
     display: flex;
     justify-content: space-between;
@@ -452,7 +347,6 @@ body {
 
 .process-step {
     flex: 1;
-    min-width: 250px;
     padding: 30px;
     background: transparent;
     position: relative;
@@ -466,11 +360,6 @@ body {
     border-radius: 50%;
     margin: 0 auto 20px;
     box-shadow: 0 0 15px #00d4ff;
-}
-
-.workflow-wrapper {
-    position: relative;
-    padding: 60px 0;
 }
 
 .flow-line {
@@ -490,16 +379,22 @@ body {
     filter: drop-shadow(0 0 8px #00d4ff);
 }
 
-@keyframes drawLine {
-    0% { stroke-dashoffset: 1000; opacity: 0; }
-    20% { opacity: 1; }
-    80% { opacity: 1; }
-    100% { stroke-dashoffset: 0; opacity: 0; }
+.scroll-vertical-container {
+    height: 350px;
+    overflow: hidden;
+    position: relative;
 }
 
+.scroll-content {
+    display: flex;
+    flex-direction: column;
+    transform: translate3d(0, 0, 0);
+    animation: verticalLoop 20s linear infinite;
+    will-change: transform;
+}
 
 /* =============================================================
-   9. JOIN US SECTION STYLING
+   7. JOIN US SECTION
    ============================================================= */
 .join-container {
     max-width: 800px;
@@ -536,7 +431,6 @@ body {
     color: rgba(255, 255, 255, 0.4);
 }
 
-/* Interactive Glow on Focus */
 .join-form input:focus, 
 .join-form select:focus, 
 .join-form textarea:focus {
@@ -546,17 +440,16 @@ body {
 }
 
 .join-form select option {
-    background: #161C28; /* Matches your body background */
+    background: #161C28;
     color: white;
 }
 
-/* The Submit Button */
 .join-btn {
     align-self: center;
     padding: 15px 50px;
-    background: transparent;
+    background-color: #00d2ff;
     border: 1px solid var(--theme-glow);
-    color: var(--theme-glow);
+    color: #ffffff;
     border-radius: 50px;
     cursor: pointer;
     font-size: 16px;
@@ -564,8 +457,6 @@ body {
     letter-spacing: 2px;
     transition: all 0.4s var(--ease-smooth);
     margin-top: 20px;
-    color: #ffffff;
-    background-color: #00d2ff;
 }
 
 .join-btn:hover {
@@ -575,92 +466,8 @@ body {
     transform: translateY(-3px);
 }
 
-/* Mobile Responsiveness for Form */
-@media (max-width: 600px) {
-    .input-group {
-        flex-direction: column;
-    }
-}
-
-
-
 /* =============================================================
-   10. FOOTER STYLING (FOOTER-GLASS)
-   ============================================================= */
-.footer-glass {
-    position: relative; /* Overriding 'fixed' from .navglass */
-    bottom: 0;
-    left: 0;
-    transform: none;
-    width: 85%;
-    max-width: 1100px;
-    height: auto;
-    margin: 80px auto 40px; /* Space above footer */
-    padding: 30px 50px;
-    border-radius: 30px; /* Slightly more square than nav */
-}
-
-.footer-content {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    width: 100%;
-}
-
-.footer-left p {
-    font-size: 13px;
-    color: rgba(255, 255, 255, 0.6);
-    margin-top: 10px;
-}
-
-.social-links {
-    display: flex;
-    gap: 20px;
-    justify-content: flex-end;
-    margin-bottom: 15px;
-}
-
-.social-links a {
-    text-decoration: none;
-    color: var(--theme-glow);
-    font-weight: bold;
-    font-size: 14px;
-    width: 35px;
-    height: 35px;
-    border: 1px solid rgba(0, 210, 255, 0.3);
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: all 0.3s var(--ease-smooth);
-}
-
-.social-links a:hover {
-    background: var(--theme-glow);
-    color: #000;
-    box-shadow: 0 0 15px var(--theme-glow);
-    transform: translateY(-3px);
-}
-
-.copyright {
-    font-size: 12px;
-    color: rgba(255, 255, 255, 0.4);
-}
-
-/* Responsive Footer */
-@media (max-width: 768px) {
-    .footer-content {
-        flex-direction: column;
-        text-align: center;
-        gap: 30px;
-    }
-    .social-links {
-        justify-content: center;
-    }
-}
-
-/* =============================================================
-   10. ENHANCED FOOTER DESIGN
+   8. FOOTER STYLING (FOOTER-GLASS)
    ============================================================= */
 .footer-glass {
     position: relative;
@@ -670,11 +477,22 @@ body {
     max-width: 100%;
     margin: 100px auto 40px;
     height: auto;
-    padding: 60px 50px 30px; /* More top padding */
+    padding: 60px 50px 30px;
     border-radius: 40px;
-    border-top: 2px solid var(--theme-glow); /* Neon accent top line */
+    border-top: 2px solid var(--theme-glow);
     background: rgba(255, 255, 255, 0.03);
-    display: block; /* Overwrite flex from navglass */
+    display: block;
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    border: 1px solid var(--glass-border);
+    transition: 0.4s ease;
+}
+
+.footer-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
 }
 
 .footer-grid {
@@ -700,36 +518,17 @@ body {
     text-transform: uppercase;
 }
 
-.footer-col ul {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-}
+.footer-col ul { list-style: none; padding: 0; margin: 0; }
+.footer-col ul li { margin-bottom: 12px; }
+.footer-col ul a { text-decoration: none; color: rgba(255, 255, 255, 0.5); font-size: 14px; transition: 0.3s; }
+.footer-col ul a:hover { color: var(--theme-glow); padding-left: 5px; }
 
-.footer-col ul li {
-    margin-bottom: 12px;
-}
-
-.footer-col ul a {
-    text-decoration: none;
-    color: rgba(255, 255, 255, 0.5);
-    font-size: 14px;
-    transition: 0.3s;
-}
-
-.footer-col ul a:hover {
-    color: var(--theme-glow);
-    padding-left: 5px;
-}
-
-/* Status & Bottom Bar */
 .footer-bottom {
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding-top: 30px;
     border-top: 1px solid rgba(255, 255, 255, 0.05);
-
 }
 
 .footer-status {
@@ -743,10 +542,71 @@ body {
 .status-dot {
     width: 8px;
     height: 8px;
-    background: #00ff88; /* Green status */
+    background: #00ff88;
     border-radius: 50%;
     box-shadow: 0 0 10px #00ff88;
     animation: pulseStatus 2s infinite;
+}
+
+.social-links { display: flex; gap: 20px; justify-content: flex-end; margin-bottom: 15px; }
+.social-links a {
+    text-decoration: none;
+    color: var(--theme-glow);
+    font-weight: bold;
+    font-size: 14px;
+    width: 35px;
+    height: 35px;
+    border: 1px solid rgba(0, 210, 255, 0.3);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s var(--ease-smooth);
+}
+.social-links a:hover {
+    background: var(--theme-glow);
+    color: #000;
+    box-shadow: 0 0 15px var(--theme-glow);
+    transform: translateY(-3px);
+}
+
+.footer-left p { font-size: 13px; color: rgba(255, 255, 255, 0.6); margin-top: 10px; }
+.copyright { font-size: 12px; color: rgba(255, 255, 255, 0.4); }
+
+/* =============================================================
+   9. KEYFRAMES
+   ============================================================= */
+@keyframes fadeInUp {
+    0% { opacity: 0; transform: translateY(30px); filter: blur(10px); }
+    100% { opacity: 1; transform: translateY(0); filter: blur(0); }
+}
+
+@keyframes colorFlow {
+    0% { background-position: 200% center; }
+    100% { background-position: 0% center; }
+}
+
+@keyframes verticalLoop {
+    0% { transform: translate3d(0, 0, 0); }
+    100% { transform: translate3d(0, -50%, 0); }
+}
+
+@keyframes changeWord {
+    0%, 33% { content: "Mobile"; }
+    34%, 66% { content: "Web"; }
+    67%, 100% { content: "AI"; }
+}
+
+@keyframes flow {
+    from { stroke-dashoffset: 30; }
+    to { stroke-dashoffset: 0; }
+}
+
+@keyframes drawLine {
+    0% { stroke-dashoffset: 1000; opacity: 0; }
+    20% { opacity: 1; }
+    80% { opacity: 1; }
+    100% { stroke-dashoffset: 0; opacity: 0; }
 }
 
 @keyframes pulseStatus {
@@ -754,93 +614,75 @@ body {
     50% { opacity: 0.4; }
     100% { opacity: 1; }
 }
-.menu-icon {
-    display: none;
-    flex-direction: column;
-    gap: 5px;
-}
 
-.menu-icon .line {
-    width: 100%;
-    height: 3px;
-    background-color: var(--theme-glow);
-    border-radius: 2px;
-}
-
+/* =============================================================
+   10. MEDIA QUERIES
+   ============================================================= */
 @media (max-width: 1024px) {
-
-    .glassframe{
-        width: 90%;
-    }
-
-    nav ul {
-        display: none;
-    }
-
-    .menu-icon {
-        display: flex;
-        width: 30px;
-        cursor: pointer;
-    }
-
-    .main h3{
-        min-width: max-content;
-        justify-content: center;
-    }
+    .glassframe { width: 90%; }
+    nav ul { display: none; }
+    .menu-icon { display: flex; width: 30px; cursor: pointer; }
 
     .cards {
-    display: flex;
-    overflow-x: auto;
-    justify-content: flex-start;
-    scroll-snap-type: x mandatory; 
-    scroll-behavior: smooth;
-    -webkit-overflow-scrolling: touch; 
-    gap: 24px;
-    padding: 20px;
-    
+        overflow-x: auto;
+        justify-content: flex-start;
+        scroll-snap-type: x mandatory; 
+        scroll-behavior: smooth;
+        -webkit-overflow-scrolling: touch; 
+        scrollbar-width: none;
+        padding-bottom: 60px;
+        position: relative;
+    }
+    .cards::-webkit-scrollbar { display: none; }
+
+    .card-wrapper {
+        scroll-snap-align: center; 
+        height: auto;
+        flex: 0 0 100%; 
+    }
+    .card-wrapper .displayCarda { width: 100%; }
+
+    .dot-nav {
+        position: absolute;
+        bottom: 5%;
+        left: 50%;
+        transform: translateX(-50%);
+        display: flex;
+        flex-direction: row;
+        gap: 15px;
+        z-index: 10;
+    }
+    .dot-nav a {
+        width: 12px;
+        height: 12px;
+        background: rgba(255, 255, 255, 0.2);
+        border: 1px solid var(--theme-glow);
+        border-radius: 50%;
+        transition: all 0.3s var(--ease-smooth);
+        cursor: pointer;
+        text-decoration: none;
+    }
+    .dot-nav a.active {
+        background: var(--theme-glow);
+        box-shadow: 0 0 10px var(--theme-glow);
+        transform: scale(1.3);
+    }
 }
 
-.card-wrapper {
-    /* 2. Define where the card should "lock" */
-    scroll-snap-align: center; 
-    height: auto;
-    
-    /* 3. Ensure cards don't shrink */
-    flex: 0 0 100%; 
-    ;
-
-    
+@media (min-width: 1024px) {
+    .card-wrapper { flex: 0 0 calc(33.333% - 24px); }
 }
 
-.card-wrapper .displayCarda{
-    width: 100%;
-    
+@media (max-width: 768px) {
+    .title { font-size: 2.2rem; }
+    .navglass { width: 95%; padding: 10px 20px; }
+    .cardch-wrapper { flex-direction: column; }
+    .footer-content { flex-direction: column; text-align: center; gap: 30px; }
+    .social-links { justify-content: center; }
 }
 
-.desc{
-    text-align: center;
-
-     .title { font-size: 1.8rem; }
-    .desc { font-size: 14px; }
-    
+@media (max-width: 600px) {
+    .input-group { flex-direction: column; }
 }
 
-    
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+@media (max-width: 320px) {}

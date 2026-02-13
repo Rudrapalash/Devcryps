@@ -9,12 +9,10 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@300..900&family=Ubuntu:wght@300;400;500;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="./style/style.css">
+    
     <style>
-        /* Ensuring the workflow wrapper can contain the absolute SVG */
-        .workflow-wrapper {
-            position: relative;
-            padding: 40px 0;
-        }
+        /* --- SCROLLBAR REMOVAL & DOT STYLING --- */
+       
     </style>
 </head>
 
@@ -46,8 +44,8 @@
             <span class="animated-text ubuntu-medium desc" style="font-size: x-large; padding-top: 2px; text-align: center;"></span>
         </header>
 
-        <section class="cards" aria-label="Our Core Specializations">
-            <article class="card-wrapper">
+        <section class="cards" id="cardSlider" aria-label="Our Core Specializations">
+            <article class="card-wrapper" id="section1">
                 <div class="displayCarda scroll-vertical-container">
                     <div class="scroll-content">
                         <img src="./Assets/app_img.png" class="cardimg" alt="Mobile App UI Interface">
@@ -57,7 +55,7 @@
                 <button type="button">Mobile</button>
             </article>
 
-            <article class="card-wrapper">
+            <article class="card-wrapper" id="section2">
                 <div class="displayCarda scroll-vertical-container">
                     <div class="scroll-content">
                         <img src="./Assets/web_img.png" class="cardimg" alt="Web Dashboard Interface">
@@ -68,18 +66,23 @@
                 <button type="button">Scalable Web</button>
             </article>
 
-            <article class="card-wrapper">
+            <article class="card-wrapper" id="section3">
                 <div class="displayCarda scroll-vertical-container">
                     <img src="./Assets/ai_img.png" class="cardimg" alt="AI Smart Engine Visualization">
                 </div>
                 <button type="button">Smart Engines</button>
             </article>
         </section>
+
+        <div class="dot-nav">
+            <a href="#section1" class="active"></a>
+            <a href="#section2"></a>
+            <a href="#section3"></a>
+        </div>
     </main> 
 
     <section class="glassframe">
         <h2 class="ubuntu-medium title section-header">Why Partner With Devcryps?</h2>
-        
         <div class="cardch-wrapper">
             <article class="cardch">
                 <h3 class="ubuntu-medium">Architecting Scalability</h3>
@@ -122,64 +125,7 @@
         </div>
     </section>
 
-    <section class="glassframe" id="contact">
-        <h2 class="ubuntu-medium title">Join the Vision</h2>
-        <p class="ubuntu-medium desc contact-subtext">
-            Whether you are a visionary client or a brilliant developer, let's build the future together.
-        </p>
-
-        <div class="join-container">
-            <form class="join-form">
-                <div class="input-group">
-                    <input type="text" name="name" placeholder="Full Name" required>
-                    <input type="email" name="email" placeholder="Email Address" required>
-                </div>
-                
-                <select name="role" class="ubuntu-medium" required>
-                    <option value="" disabled selected>I am a...</option>
-                    <option value="client">Potential Client</option>
-                    <option value="developer">Developer / Engineer</option>
-                    <option value="partner">Strategic Partner</option>
-                </select>
-                
-                <textarea name="message" placeholder="Tell us about your project or expertise..." rows="5"></textarea>
-                
-                <button type="submit" class="ubuntu-medium join-btn">Send Message</button>
-            </form>
-        </div>
-    </section>
-
     <footer class="navglass footer-glass">
-        <div class="footer-grid">
-            <div class="footer-col brand-col">
-                <a href="#" class="logo">DEVCRYPS</a>
-                <p class="ubuntu-medium footer-tagline">Engineering the future of your digital vision through secure, scalable, and intelligent solutions.</p>
-                <nav class="social-links">
-                    <a href="#" aria-label="LinkedIn">LN</a>
-                    <a href="#" aria-label="GitHub">GH</a>
-                    <a href="#" aria-label="Twitter">TW</a>
-                </nav>
-            </div>
-
-            <div class="footer-col">
-                <h4 class="ubuntu-medium">Platform</h4>
-                <ul>
-                    <li><a href="#">Services</a></li>
-                    <li><a href="#">Portfolio</a></li>
-                    <li><a href="#">About Us</a></li>
-                </ul>
-            </div>
-
-            <div class="footer-col">
-                <h4 class="ubuntu-medium">Expertise</h4>
-                <ul>
-                    <li><a href="#">Security DNA</a></li>
-                    <li><a href="#">Scalable Web</a></li>
-                    <li><a href="#">Cloud Systems</a></li>
-                </ul>
-            </div>
-        </div>
-
         <div class="footer-bottom">
             <p class="copyright">&copy; 2026 Devcryps. Built with Precision.</p>
             <div class="footer-status">
@@ -189,6 +135,42 @@
     </footer>
 
     <script>
+        // --- DOT NAVIGATION LOGIC ---
+        const sections = document.querySelectorAll('.card-wrapper');
+        const navDots = document.querySelectorAll('.dot-nav a');
+        const slider = document.getElementById('cardSlider');
+
+        const observerOptions = {
+            root: slider,
+            threshold: 0.5
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach((entry) => {
+                if (entry.isIntersecting) {
+                    navDots.forEach((dot) => {
+                        dot.classList.toggle('active', dot.getAttribute('href') === `#${entry.target.id}`);
+                    });
+                }
+            });
+        }, observerOptions);
+
+        sections.forEach((section) => observer.observe(section));
+
+        // Smooth click-to-scroll for dots
+        navDots.forEach(dot => {
+            dot.addEventListener('click', (e) => {
+                e.preventDefault();
+                const targetId = dot.getAttribute('href');
+                document.querySelector(targetId).scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'nearest',
+                    inline: 'center'
+                });
+            });
+        });
+
+        // --- EXISTING FLOW LINE LOGIC ---
         function drawFlowLine() {
             const path = document.getElementById('flow-path');
             const svg = document.getElementById('flow-svg');
@@ -198,10 +180,8 @@
             if (nodes.length < 2) return;
 
             let d = "";
-
             nodes.forEach((node, index) => {
                 const rect = node.getBoundingClientRect();
-                // Center point of the node relative to the SVG container
                 const x = rect.left - svgRect.left + rect.width / 2;
                 const y = rect.top - svgRect.top + rect.height / 2;
 
@@ -211,9 +191,6 @@
                     const prevRect = nodes[index - 1].getBoundingClientRect();
                     const prevX = prevRect.left - svgRect.left + prevRect.width / 2;
                     const prevY = prevRect.top - svgRect.top + prevRect.height / 2;
-                    
-                    // Bezier curve points
-                    // We adjust control points based on whether layout is vertical or horizontal
                     const isVertical = Math.abs(x - prevX) < 50; 
                     
                     if (isVertical) {
@@ -225,14 +202,11 @@
                     }
                 }
             });
-
             path.setAttribute('d', d);
         }
 
-        // Initialize and listen for changes
         window.addEventListener('resize', drawFlowLine);
         window.addEventListener('load', drawFlowLine);
-        // Initial execution
         drawFlowLine();
     </script>
 
